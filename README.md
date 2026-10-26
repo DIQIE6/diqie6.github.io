@@ -1,29 +1,51 @@
-# 碳名局 · Carbon Name Lab
+# diqie6.github.io
 
-一个无需构建、无需外部依赖的 IUPAC 命名练习网站。随机生成碳数少于 10 的链状、环状或芳香族有机物，可以：
+个人小站导航首页，线上地址：<https://diqie6.github.io/>
 
-- **Structure → Name**：看骨架，从 4/5 个英文 IUPAC 名称中选正确答案
-- **Name → Structure**：看英文名，从 4/5 个骨架中选正确结构
-- 一键分享当前题目；手机调用系统分享面板，桌面复制挑战链接
-- 命名规则、官能团优先级、计分、连续答对、链/环筛选
-- 题库：**279 个结构**，全部 C1–C9，含多卤代、卤代胺、卤代氨基酸、卤代酰胺/腈/醚、环胺等复杂取代基
+每个成品单独一个仓库，各自发布在 `https://diqie6.github.io/<仓库名>/`。
 
-## Online
+## 现在有哪些站
 
-<https://diqie6.github.io/>
+| 站点 | 仓库 | 线上地址 |
+|---|---|---|
+| 碳名局 · Carbon Name Lab | [IUPAC](https://github.com/DIQIE6/IUPAC) | <https://diqie6.github.io/IUPAC/> |
+| AlgoPick · 算法选型训练器 | [ALGOPICK](https://github.com/DIQIE6/ALGOPICK) | <https://diqie6.github.io/ALGOPICK/> |
+| Mini Metro 复刻 | [MINIMETRO](https://github.com/DIQIE6/MINIMETRO) | <https://diqie6.github.io/MINIMETRO/> |
 
-## Local preview
+## 以后怎么加一个站点
 
-```powershell
-python -m http.server 8787 --bind 127.0.0.1
+1. 在 GitHub 新建仓库，把站点推上去（`main` 分支）。
+2. 仓库 **Settings → Pages → Source** 选 `Deploy from a branch`，分支 `main`、目录 `/ (root)`，保存。
+3. 打开本仓库的 `js/sites.js`，照着已有条目加一段：
+
+```js
+{
+  name: '新站名字',
+  subtitle: 'English Name',
+  desc: '一句话介绍。',
+  url: 'https://diqie6.github.io/新仓库名/',
+  tag: '分类',
+},
 ```
 
-Then open <http://127.0.0.1:8787/>.
+4. 提交并推送 `main`，首页会自动更新（GitHub Pages 重新构建约 1 分钟）。
 
-## Notes
+> 只想要一个文件的话：`index.html` 负责渲染，`js/sites.js` 负责数据，`styles.css` 负责样式。三者互不干扰，改配色改 `styles.css` 顶部的 `:root` 变量即可。
 
-- No build step and no CDN dependencies; all structures are rendered as inline SVG.
-- Constitutional nomenclature only; E/Z and R/S descriptors are intentionally omitted.
-- The share URL uses the current origin. A local `127.0.0.1` link only works on that machine; the deployed GitHub Pages URL works publicly.
+## 本地预览
 
-![Carbon Name Lab](assets/preview-desktop.png)
+```powershell
+python -m http.server 8080
+```
+
+然后打开 <http://127.0.0.1:8080/>。
+
+## 文件
+
+| 文件 | 作用 |
+|---|---|
+| `index.html` | 门户页面结构 + 渲染卡片的小脚本 |
+| `js/sites.js` | **站点清单（常改的就是这个）** |
+| `styles.css` | 全部样式 |
+| `assets/favicon.svg` | 站点图标 |
+| `.nojekyll` | 告诉 GitHub Pages 不要跑 Jekyll |
