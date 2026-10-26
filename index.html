@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f3efe4" />
+  <meta
+    name="description"
+    content="碳名局：随机生成碳数小于 10 的链状或环状有机物。可看结构选英文 IUPAC 名称，也可看英文名称选结构。"
+  />
+  <title>碳名局 · Name that molecule</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-texture" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="碳名局首页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 44 44" role="presentation">
+          <path d="M22 5.5 36.3 13.8v16.4L22 38.5 7.7 30.2V13.8Z" fill="none" stroke="currentColor" stroke-width="2.1" />
+          <circle cx="22" cy="22" r="4.1" fill="currentColor" />
+          <path d="M22 5.5v8M36.3 30.2l-7-4M7.7 30.2l7-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        </svg>
+      </span>
+      <span class="brand-word">
+        <strong>碳名局</strong>
+        <small>CARBON NAME LAB</small>
+      </span>
+    </a>
+
+    <div class="header-tools">
+      <div class="header-stat">
+        <span>STREAK</span>
+        <strong id="header-streak">0</strong>
+      </div>
+      <div class="header-stat">
+        <span>SCORE</span>
+        <strong id="header-score">0</strong>
+      </div>
+      <button class="round-help" id="help-open" type="button" aria-haspopup="dialog">
+        <span aria-hidden="true">?</span>
+        <span class="sr-only">How to play</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-title">
+        <p class="eyebrow"><span class="eyebrow-line"></span> AN IUPAC NOMENCLATURE DRILL</p>
+        <h1 id="page-title" lang="en">Name that <em>molecule.</em></h1>
+      </div>
+      <div class="intro-copy">
+        <p>
+          随机出现一个碳数 &lt; 10 的链状或环状有机物。<br />
+          看结构选英文 IUPAC 名，或看英文名选骨架，四选一 / 五选一。
+        </p>
+        <div class="intro-tags" aria-label="Question bank facts">
+          <span><strong id="bank-count">279</strong> structures</span>
+          <span class="tag-dot" aria-hidden="true"></span>
+          <span>C1–C9</span>
+          <span class="tag-dot" aria-hidden="true"></span>
+          <span>chains + rings</span>
+          <span class="tag-dot" aria-hidden="true"></span>
+          <span>N + halogens</span>
+          <span class="tag-dot" aria-hidden="true"></span>
+          <span>two directions</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="workspace">
+      <section class="quiz-card" id="quiz-card" aria-labelledby="question-title" lang="en">
+        <div class="card-rule">
+          <span id="question-number">MOLECULE 01</span>
+          <span class="rule-line" aria-hidden="true"></span>
+          <span class="structure-meta" id="structure-meta">
+            <span id="family-tag">ACYCLIC</span>
+            <span class="meta-dot" id="meta-dot" aria-hidden="true"></span>
+            <span id="formula-tag">C6H14</span>
+          </span>
+        </div>
+
+        <div class="molecule-stage" id="molecule-stage">
+          <div class="stage-grid" aria-hidden="true"></div>
+          <div class="molecule-art" id="molecule-art"></div>
+          <div class="name-plate" id="name-plate" hidden>
+            <span class="name-plate-kicker">IUPAC NAME</span>
+            <p class="name-display" id="name-display" lang="en"></p>
+            <span class="name-plate-rule" aria-hidden="true"></span>
+            <span class="name-plate-note">CHOOSE THE MATCHING SKELETON</span>
+          </div>
+          <span class="carbon-badge" id="carbon-badge">6 C</span>
+          <span class="stage-caption" id="stage-caption">SKELETAL FORMULA</span>
+        </div>
+
+        <div class="question-area">
+          <div class="question-copy">
+            <p class="eyebrow"><span class="eyebrow-line"></span><span id="question-eyebrow">CHOOSE ONE</span></p>
+            <h2 id="question-title">What is the IUPAC name?</h2>
+            <p class="question-hint" id="question-hint">Pick the systematic English name.</p>
+          </div>
+          <div class="count-picker">
+            <span class="count-label">OPTIONS</span>
+            <div class="segmented" id="count-control" role="group" aria-label="Number of answer choices">
+              <button type="button" data-count="4" class="is-active" aria-pressed="true">4</button>
+              <button type="button" data-count="5" aria-pressed="false">5</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="options" id="options" role="group" aria-labelledby="question-title"></div>
+
+        <div class="feedback" id="feedback" hidden>
+          <div class="feedback-mark" aria-hidden="true"></div>
+          <div class="feedback-copy">
+            <p class="feedback-title" id="feedback-title"></p>
+            <p class="feedback-answer"><span id="feedback-label">Correct answer:</span> <strong id="feedback-answer"></strong></p>
+            <p class="feedback-rule" id="feedback-rule"></p>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <p class="key-hint">
+            <kbd>A</kbd>–<kbd>E</kbd> to choose
+            <span class="hint-sep" aria-hidden="true">·</span>
+            <kbd>Enter</kbd> for next
+          </p>
+          <div class="card-actions">
+            <button type="button" class="share-button" id="share-button" aria-label="Share this question">
+              <svg class="share-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="18" cy="5" r="2.5" />
+                <circle cx="6" cy="12" r="2.5" />
+                <circle cx="18" cy="19" r="2.5" />
+                <path d="m8.3 10.8 7.4-4.3M8.3 13.2l7.4 4.3" />
+              </svg>
+              <span class="share-label">Share</span>
+            </button>
+            <button type="button" class="next-button" id="next-button">
+              <span id="next-label">New molecule</span>
+              <span class="next-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="sidebar" aria-label="Quiz dashboard" lang="en">
+        <section class="score-card" aria-labelledby="score-heading">
+          <div class="score-card-head">
+            <span id="score-heading">ROUND STATS</span>
+            <span class="live-pill"><span aria-hidden="true"></span> LIVE</span>
+          </div>
+          <div class="score-hero">
+            <strong id="score-value">0</strong>
+            <span>correct<br />answers</span>
+          </div>
+          <dl class="stats-grid">
+            <div>
+              <dt>Answered</dt>
+              <dd id="answered-value">0</dd>
+            </div>
+            <div>
+              <dt>Accuracy</dt>
+              <dd id="accuracy-value">—</dd>
+            </div>
+            <div>
+              <dt>Best streak</dt>
+              <dd id="best-value">0</dd>
+            </div>
+            <div>
+              <dt>Streak</dt>
+              <dd id="streak-value">0</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="panel mode-panel" aria-labelledby="mode-heading">
+          <div class="panel-head">
+            <h2 id="mode-heading">QUIZ MODE</h2>
+            <span class="panel-index">00</span>
+          </div>
+          <div class="mode-stack" id="mode-control" role="group" aria-label="Quiz direction">
+            <button type="button" data-mode="name" class="is-active" aria-pressed="true">
+              <span>Structure → Name</span>
+              <small>Read the skeleton</small>
+            </button>
+            <button type="button" data-mode="structure" aria-pressed="false">
+              <span>Name → Structure</span>
+              <small>Match the drawing</small>
+            </button>
+          </div>
+          <p class="mode-note">Both directions feed the same score.</p>
+        </section>
+
+        <section class="panel" aria-labelledby="set-heading">
+          <div class="panel-head">
+            <h2 id="set-heading">MOLECULE SET</h2>
+            <span class="panel-index">01</span>
+          </div>
+          <div class="filter-stack" id="family-filter" role="group" aria-label="Molecule set">
+            <button type="button" data-family="all" class="is-active" aria-pressed="true">
+              <span>Everything</span><span class="filter-count">279</span>
+            </button>
+            <button type="button" data-family="chain" aria-pressed="false">
+              <span>Chains only</span><span class="filter-count">231</span>
+            </button>
+            <button type="button" data-family="ring" aria-pressed="false">
+              <span>Rings only</span><span class="filter-count">48</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="panel checklist" aria-labelledby="checklist-heading">
+          <div class="panel-head">
+            <h2 id="checklist-heading">CHECKLIST</h2>
+            <span class="panel-index">02</span>
+          </div>
+          <ol>
+            <li><span>01</span><p>Rank the groups: the <strong>highest priority</strong> becomes the suffix.</p></li>
+            <li><span>02</span><p>Find the <strong>parent chain</strong> or ring containing it.</p></li>
+            <li><span>03</span><p>Number for the <strong>lowest locants</strong>.</p></li>
+            <li><span>04</span><p>Alphabetize prefixes, ignoring <strong>di- / tri- / tert-</strong>.</p></li>
+          </ol>
+          <p class="panel-note">Options are always real molecules from the deck, so structure choices never duplicate the answer. The bank now includes crowded N- and halogen-substituted cases.</p>
+        </section>
+
+        <button class="how-link" id="help-open-secondary" type="button" aria-haspopup="dialog">
+          How the quiz works <span aria-hidden="true">↗</span>
+        </button>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer" lang="en">
+    <span>碳名局 / CARBON NAME LAB</span>
+    <span>Structural formulas, not stereochemistry.</span>
+  </footer>
+
+  <dialog class="help-dialog" id="help-dialog" aria-labelledby="help-title" lang="en">
+    <button class="dialog-close" id="help-close" type="button" aria-label="Close">×</button>
+    <p class="eyebrow"><span class="eyebrow-line"></span> FIELD NOTES</p>
+    <h2 id="help-title">How to play</h2>
+    <p class="dialog-lead">
+      Each round shows either a skeletal formula or an English IUPAC name with fewer than ten carbon atoms. Choose the
+      matching name or skeleton from the four or five options, then read the one-line naming rule. Both directions feed
+      the same score. Use <strong>Share</strong> under the choices to send the exact question as a challenge link.
+    </p>
+    <div class="help-grid">
+      <div>
+        <h3>Priority first</h3>
+        <p>Rank every functional group from the ladder below. Only the highest-priority group is named as the suffix; the rest become prefixes.</p>
+      </div>
+      <div>
+        <h3>Numbering</h3>
+        <p>Number the parent chain from the end that gives the principal group, then the substituents, the lowest locants.</p>
+      </div>
+      <div>
+        <h3>Two directions</h3>
+        <p>Structure → Name asks for the IUPAC name. Name → Structure asks you to pick the matching skeleton. Options are always real molecules from the bank.</p>
+      </div>
+      <div>
+        <h3>Keyboard</h3>
+        <p><kbd>A</kbd>–<kbd>E</kbd> select an option. <kbd>Enter</kbd> moves to the next molecule after answering.</p>
+      </div>
+    </div>
+    <section class="priority-section" aria-labelledby="priority-title">
+      <div class="priority-head">
+        <h3 id="priority-title">Functional-group priority</h3>
+        <span>highest → lowest</span>
+      </div>
+      <ol class="priority-list">
+        <li><span>1</span>Carboxylic acid <code>-oic acid</code></li>
+        <li><span>2</span>Sulfonic acid <code>-sulfonic acid</code></li>
+        <li><span>3</span>Ester <code>-oate</code></li>
+        <li><span>4</span>Acid halide <code>-oyl halide</code></li>
+        <li><span>5</span>Amide <code>-amide</code></li>
+        <li><span>6</span>Nitrile <code>-nitrile</code></li>
+        <li><span>7</span>Aldehyde <code>-al</code></li>
+        <li><span>8</span>Ketone <code>-one</code></li>
+        <li><span>9</span>Alcohol <code>-ol</code></li>
+        <li><span>10</span>Thiol <code>-thiol</code></li>
+        <li><span>11</span>Amine <code>-amine</code></li>
+        <li><span>12</span>Ether <code>alkoxy-</code></li>
+        <li><span>13</span>Alkene <code>-ene</code></li>
+        <li><span>14</span>Alkyne <code>-yne</code></li>
+        <li><span>15</span>Alkane <code>-ane</code></li>
+        <li><span>16</span>Halogen <code>halo-</code></li>
+        <li><span>17</span>Nitro <code>nitro-</code></li>
+      </ol>
+    </section>
+    <p class="alpha-note">
+      <strong>Alphabetize</strong> prefixes by the parent substituent name and ignore multiplying or structural prefixes
+      such as <em>di-</em>, <em>tri-</em>, <em>tert-</em>, <em>sec-</em> and <em>iso-</em>. Example:
+      2,3-dimethylpentane is alphabetized under <strong>m</strong> (methyl), not <strong>d</strong>.
+    </p>
+    <p class="stereo-note">
+      <strong>Scope:</strong> constitutional names only. E/Z and R/S descriptors are intentionally omitted; each drawing
+      shows connectivity, not a specified stereoisomer.
+    </p>
+    <div class="dialog-foot">
+      <span id="help-count">C1–C9 · 279 structures</span>
+      <button type="button" class="dialog-start" id="help-start">Start naming <span aria-hidden="true">→</span></button>
+    </div>
+  </dialog>
+
+  <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" hidden></div>
+  <div class="sr-only" id="live-region" aria-live="polite"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
