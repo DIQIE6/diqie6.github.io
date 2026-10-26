@@ -12,11 +12,23 @@
 | AlgoPick · 算法选型训练器 | [ALGOPICK](https://github.com/DIQIE6/ALGOPICK) | <https://diqie6.github.io/ALGOPICK/> |
 | Mini Metro 复刻 | [MINIMETRO](https://github.com/DIQIE6/MINIMETRO) | <https://diqie6.github.io/MINIMETRO/> |
 
+## 发布方式（维护必读）
+
+三个项目仓库都是这样发布的：
+
+- **GitHub Pages 的源是 `gh-pages` 分支**（首次推送 `gh-pages` 时 Pages 自动开启）。
+- 每个仓库带一个 `.github/workflows/sync-pages.yml`：每次 push `main` 后，自动把 `main` 强制同步到 `gh-pages`。
+
+所以**你只需要改 `main` 并推送**，等 Actions 跑完（约 1 分钟），站点就会更新。不要手改 `gh-pages`，它会被覆盖。
+
+> 万一 Actions 没跑：去仓库 Actions 页把 `Sync main to gh-pages` 重跑一次，或本地执行 `git push --force origin main:gh-pages`。
+
 ## 以后怎么加一个站点
 
-1. 在 GitHub 新建仓库，把站点推上去（`main` 分支）。
-2. 仓库 **Settings → Pages → Source** 选 `Deploy from a branch`，分支 `main`、目录 `/ (root)`，保存。
-3. 打开本仓库的 `js/sites.js`，照着已有条目加一段：
+1. 在 GitHub 新建仓库，把站点内容推上去（`main` 分支）。
+2. 首次开启 Pages：再推一个内容和 `main` 一样的 `gh-pages` 分支（会自动开启 Pages 并从它发布）；也可以去仓库 **Settings → Pages** 手动选分支保存。
+3. 把已有仓库里的 `.github/workflows/sync-pages.yml` 复制到新仓库的同一路径，以后就只改 `main` 了。
+4. 打开本仓库的 `js/sites.js`，照着已有条目加一段：
 
 ```js
 {
@@ -28,7 +40,7 @@
 },
 ```
 
-4. 提交并推送 `main`，首页会自动更新（GitHub Pages 重新构建约 1 分钟）。
+5. 提交并推送 `main`，首页会自动更新（GitHub Pages 重新构建约 1 分钟）。
 
 > 只想要一个文件的话：`index.html` 负责渲染，`js/sites.js` 负责数据，`styles.css` 负责样式。三者互不干扰，改配色改 `styles.css` 顶部的 `:root` 变量即可。
 
